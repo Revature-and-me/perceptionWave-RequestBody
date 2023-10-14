@@ -23,6 +23,9 @@ public class JavalinSingleton {
         app.post("/echo", ctx -> {
             
             //implement logic here
+            Song song = ctx.bodyAsClass(Song.class);
+            String songJson = om.writeValueAsString(song);
+            ctx.result(songJson);
                 
         });
 
@@ -35,8 +38,13 @@ public class JavalinSingleton {
          */
         app.post("/changeartisttobeatles", ctx -> {
 
-            //implement logic here
-               
+            //create a lambda instance of the song class convert the bodyAsClass as a javalin context 
+            Song song = ctx.bodyAsClass(Song.class);
+            // set the song interface's artist name to "Beatles"
+            song.setArtistName("Beatles");
+            // Utilize Jacksons Object Mapper to write the song object as a json string
+            String songJson = om.writeValueAsString(song);
+            ctx.result(songJson);
         });
 
 
